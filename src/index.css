@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bike Tracker Design System - Dark Theme with Modern Aesthetics */
+
+@layer base {
+  :root {
+    /* Pure black theme colors */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
+
+    /* Card system for metrics */
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
+    --card-border: 0 0% 12%;
+
+    /* Primary brand colors - vibrant green */
+    --primary: 142 76% 40%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 142 86% 50%;
+
+    /* Success/positive trends */
+    --success: 142 76% 40%;
+    --success-foreground: 0 0% 0%;
+    --success-muted: 142 76% 40% / 0.15;
+
+    /* Warning/negative trends */
+    --warning: 0 84% 60%;
+    --warning-foreground: 0 0% 98%;
+    --warning-muted: 0 84% 60% / 0.15;
+
+    /* Muted elements */
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+
+    /* Interactive elements */
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 98%;
+    --accent-hover: 0 0% 16%;
+
+    /* Borders and inputs */
+    --border: 0 0% 12%;
+    --input: 0 0% 8%;
+    --ring: 142 76% 40%;
+
+    --radius: 0.75rem;
+
+    /* Chart colors */
+    --chart-1: 142 76% 40%;
+    --chart-2: 220 100% 60%;
+    --chart-3: 45 100% 60%;
+    --chart-4: 280 100% 70%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(142 76% 40%), hsl(142 86% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%), hsl(0 0% 5%));
+    
+    /* Shadows */
+    --shadow-card: 0 8px 25px -5px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 30px hsl(142 76% 40% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  .metric-card {
+    @apply bg-gradient-to-br from-card to-card/90 border border-card-border rounded-xl backdrop-blur-sm;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+    background: linear-gradient(145deg, hsl(var(--card)), hsl(0 0% 6%));
+  }
+  
+  .metric-card:hover {
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+    transform: translateY(-2px);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .trend-positive {
+    @apply text-success bg-success-muted rounded-md px-2 py-1 text-sm font-medium;
+  }
+
+  .trend-negative {
+    @apply text-warning bg-warning-muted rounded-md px-2 py-1 text-sm font-medium;
+  }
+
+  .quick-action-btn {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold rounded-lg shadow-lg;
+    transition: var(--transition-bounce);
+    box-shadow: 0 4px 15px hsl(var(--primary) / 0.2);
+  }
+  
+  .quick-action-btn:hover {
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.05);
+  }
+
+  .quick-amount-btn {
+    @apply bg-gradient-to-br from-accent to-accent-hover border border-border text-accent-foreground font-medium rounded-lg;
+    transition: var(--transition-smooth);
+    box-shadow: 0 2px 8px hsl(0 0% 0% / 0.3);
+  }
+  
+  .quick-amount-btn:hover {
+    border-color: hsl(var(--primary) / 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(0 0% 0% / 0.4);
+  }
+
+  .quick-amount-btn.selected {
+    @apply bg-gradient-to-br from-primary/20 to-primary/10 border-primary text-primary;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
