@@ -25,15 +25,17 @@ export function useActiveBikeId() {
 
 export function useActiveBike(): [Bike | undefined, (id: string) => void] {
   const [activeId, setActive] = useActiveBikeId()
-  const bike = useLiveQuery(async () => {
-    let id = activeId
-    if (!id) {
-      const b = await ensureDefaultBike()
-      id = b.id
-      setActive(b.id)
+  // Ensure a default bike OUTSIDE of liveQuery (write ops not allowed inside liveQuery)
+  useEffect(() => {
+    if (!activeId) {
+      ensureDefaultBike().then((b) => {
+        setActive(b.id)
+      }).catch(() => {})
     }
+  }, [activeId])
+  const bike = useLiveQuery(async () => {
+    const id = activeId
     return id ? db.bikes.get(id) : undefined
   }, [activeId], undefined)
   return [bike, setActive]
 }
-
